@@ -1,22 +1,52 @@
+const api = require('../../utils/api');
+const store = require('../../utils/store');
+
 Page({
   data: {
     roomCode: '',
-    log: '未连接服务端'
+    log: '准备就绪',
+    nickname: '玩家' + Math.floor(Math.random() * 1000)
   },
 
-  onLoad() {
-    // TODO: implement ws connect + auth(guest)
+  async ensureSession() {
+    let s = store.loadSession();
+    if (s && s.sessionToken) return s;
+    const resp = await api.post('/api/auth/guest', { nickname: this.data.nickname });
+    store.saveSession(resp);
+    return resp;
   },
 
   onRoomCode(e) {
-    this.setData({ roomCode: e.detail.value });
+    this.setData({ roomCode: e.detail.value.trim().toUpperCase() });
   },
 
-  onCreateRoom() {
-    this.setData({ log: 'TODO: 创建房间（将走后端 REST）' });
+  onNickname(e) {
+    this.setData({ nickname: e.detail.value.trim() });
   },
 
-  onJoinRoom() {
-    this.setData({ log: `TODO: 加入房间 ${this.data.roomCode}` });
+  async onCreateRoom() {
+    try {
+      const s = await this.ensureSession();
+      const resp = await api.post('/api/rooms', {
+        sessionToken: s.sessionToken,
+        mode: 'COOP',
+        difficulty: 'EASY'
+      });
+      wx.navigateTo({ url: `/pages/room/room?code=${resp.roomCode}` });
+    } catch (e) {
+      this.setData({ log: '创建房间失败：' + (e.errMsg || e) });
+    }
+  },
+
+  async onJoinRoom() {
+    try {
+      const code = this.data.roomCode;
+      if (!code) return this.setData({ log: '请输入房间号' });
+      const s = await this.ensureSession();
+      await api.post(`/api/rooms/${code}/join`, { sessionToken: s.sessionToken });
+      wx.navigateTo({ url: `/pages/room/room?code=${code}` });
+    } catch (e) {
+      this.setData({ log: '加入失败：' + (e.errMsg || e) });
+    }
   }
 });

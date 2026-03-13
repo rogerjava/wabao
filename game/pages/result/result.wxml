@@ -1,0 +1,4 @@
+<view class="container">
+  <view class="title">{{won ? '通关成功 🎉' : '挑战失败 💥'}}</view>
+  <button bindtap="goHome">返回首页</button>
+</view>

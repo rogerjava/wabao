@@ -1,6 +1,9 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/room/room",
+    "pages/game/game",
+    "pages/result/result"
   ],
   "window": {
     "navigationBarTitleText": "挖宝"

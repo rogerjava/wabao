@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="title">房间：{{code}}</view>
+  <view class="sub">状态：{{status}}</view>
+
+  <view class="card">
+    <view class="h">玩家</view>
+    <block wx:for="{{players}}" wx:key="playerId">
+      <view class="p">
+        <text>{{item.nickname}}</text>
+        <text class="tag" wx:if="{{item.playerId===ownerId}}">房主</text>
+        <text class="tag" wx:if="{{item.ready}}">已准备</text>
+        <text class="tag">护具{{item.shields}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="row">
+    <button bindtap="onReady">{{ready ? '取消准备' : '准备'}}</button>
+    <button wx:if="{{isOwner}}" type="primary" bindtap="onStart">开始</button>
+  </view>
+
+  <view class="log">{{log}}</view>
+</view>

@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="top">
+    <text>HP {{teamHp}}</text>
+    <text>Time {{timeLeft}}</text>
+    <button size="mini" bindtap="toggleFlagMode">{{flagMode ? '标记模式' : '开箱模式'}}</button>
+  </view>
+
+  <canvas type="2d" id="board" style="width: {{canvasW}}px; height: {{canvasH}}px;"></canvas>
+
+  <view class="hint">点击格子：开箱；标记模式下点击：插旗</view>
+</view>

@@ -1,0 +1,3 @@
+.container{padding:16rpx;}
+.top{display:flex;gap:16rpx;align-items:center;margin-bottom:12rpx;}
+.hint{color:#666;margin-top:10rpx;}
