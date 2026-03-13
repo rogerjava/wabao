@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="title">挖宝</view>
+  <view class="sub">（MVP：合作联机雏形）</view>
+
+  <button bindtap="onCreateRoom">创建房间</button>
+  <view class="row">
+    <input placeholder="输入房间号" value="{{roomCode}}" bindinput="onRoomCode" />
+    <button size="mini" bindtap="onJoinRoom">加入</button>
+  </view>
+
+  <view class="log">{{log}}</view>
+</view>

@@ -1,0 +1,11 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "wabao-game",
+  "description": "挖宝微信小游戏",
+  "appid": "",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true
+  }
+}

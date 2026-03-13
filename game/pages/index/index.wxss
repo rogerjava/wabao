@@ -1,0 +1,5 @@
+.container{padding:24rpx;}
+.title{font-size:48rpx;font-weight:700;}
+.sub{color:#666;margin-bottom:24rpx;}
+.row{display:flex;gap:16rpx;align-items:center;margin:16rpx 0;}
+.log{margin-top:24rpx;color:#333;white-space:pre-wrap;}
